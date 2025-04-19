@@ -146,50 +146,36 @@ function setStartDate(date) {
 
 // Update counter display
 function updateCounter() {
-    if (!startDate || !endDate) return;
+    if (!startDate) return;
     
     const now = new Date();
-    
-    // Calculate days completed so far (current day of the challenge)
-    const elapsedMilliseconds = now - startDate;
-    const daysElapsed = Math.floor(elapsedMilliseconds / (1000 * 60 * 60 * 24));
+    const elapsedDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
     
     // Clamp days between 0 and CHALLENGE_DAYS
-    const currentDay = Math.max(0, Math.min(daysElapsed + 1, CHALLENGE_DAYS));
+    const displayDays = Math.max(0, Math.min(elapsedDays, CHALLENGE_DAYS));
     
-    // Update the day count (which shows what day of the challenge we're on)
-    document.getElementById('dayCount').textContent = String(currentDay).padStart(2, '0');
+    document.getElementById('dayCount').textContent = String(displayDays).padStart(2, '0');
     
-    // Handle challenge states
-    if (now < startDate) {
-        // Challenge hasn't started yet
+    // If challenge completed or not started yet
+    if (elapsedDays >= CHALLENGE_DAYS || elapsedDays < 0) {
         document.getElementById('hourCount').textContent = '00';
         document.getElementById('minuteCount').textContent = '00';
         document.getElementById('secondCount').textContent = '00';
         return;
     }
     
-    if (now > endDate) {
-        // Challenge is over
-        document.getElementById('hourCount').textContent = '00';
-        document.getElementById('minuteCount').textContent = '00';
-        document.getElementById('secondCount').textContent = '00';
-        return;
-    }
+    // Calculate remaining time in current day
+    const midnight = new Date(now);
+    midnight.setHours(24, 0, 0, 0);
+    const timeLeft = midnight - now;
     
-    // Calculate remaining time until end date - THIS IS THE KEY FIX
-    const timeRemaining = endDate - now;
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
     
-    // Convert remaining time to days, hours, minutes, seconds
-    const daysRemaining = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-    const hoursRemaining = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutesRemaining = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-    const secondsRemaining = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-    
-    // Update timer displays
-    document.getElementById('hourCount').textContent = String(hoursRemaining).padStart(2, '0');
-    document.getElementById('minuteCount').textContent = String(minutesRemaining).padStart(2, '0');
-    document.getElementById('secondCount').textContent = String(secondsRemaining).padStart(2, '0');
+    document.getElementById('hourCount').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minuteCount').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('secondCount').textContent = String(seconds).padStart(2, '0');
 }
 
 // Update settings display
@@ -202,7 +188,7 @@ function updateSettingsDisplay() {
     // Update progress bar
     const now = new Date();
     const totalDuration = CHALLENGE_DAYS * 24 * 60 * 60 * 1000; // 75 days in milliseconds
-    const elapsed = Math.min(Math.max(0, now - startDate), totalDuration);
+    const elapsed = Math.min(now - startDate, totalDuration);
     const progress = Math.floor((elapsed / totalDuration) * 100);
     
     document.getElementById('progressFill').style.width = `${progress}%`;
@@ -275,20 +261,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update counter every second
     setInterval(updateCounter, 1000);
 });
-
-// These functions need to be defined or implemented in your full code
-function initializeTracker() {
-    // Implementation needed
-}
-
-function initializeJournal() {
-    // Implementation needed
-}
-
-function initializeBibleStudy() {
-    // Implementation needed
-}
-
-function initializeWeeklyReflection() {
-    // Implementation needed
-}
