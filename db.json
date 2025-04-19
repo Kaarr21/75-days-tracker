@@ -1,0 +1,49 @@
+{
+  "userData": {
+    "startDate": "2025-04-08T00:00:00.000Z",
+    "habits": {
+      "2025-04-19": [
+        "Journaling",
+        "Hydrated",
+        "Workout",
+        "Read a Book",
+        "Study"
+      ],
+      "2025-04-20": [
+        "Bible Study",
+        "Journaling",
+        "Hydrated",
+        "Workout",
+        "Read a Book"
+      ]
+    },
+    "journalEntries": {
+      "2025-04-19": {
+        "gratitude": "",
+        "greatDay": "",
+        "affirmations": "",
+        "amazingThings": "",
+        "betterDay": ""
+      }
+    },
+    "bibleStudies": {
+      "2025-04-19": {
+        "book": "",
+        "chapter": "",
+        "verses": "",
+        "keyVerse": "",
+        "observations": "",
+        "application": "",
+        "prayer": ""
+      }
+    },
+    "weeklyReflections": {
+      "1": {
+        "deepClean": true,
+        "skinCare": true,
+        "reflection": ""
+        
+      }
+    }
+  }
+}

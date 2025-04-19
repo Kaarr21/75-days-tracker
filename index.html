@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>75 Days Challenge Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>75 Days Challenge</h1>
+            <div class="digital-counter" id="digitalCounter">
+                <div class="counter-display">
+                    <span id="dayCount">00</span>
+                    <span class="counter-label">DAYS</span>
+                </div>
+                <div class="counter-display">
+                    <span id="hourCount">00</span>
+                    <span class="counter-label">HOURS</span>
+                </div>
+                <div class="counter-display">
+                    <span id="minuteCount">00</span>
+                    <span class="counter-label">MINUTES</span>
+                </div>
+                <div class="counter-display">
+                    <span id="secondCount">00</span>
+                    <span class="counter-label">SECONDS</span>
+                </div>
+            </div>
+        </header>
+
+        <div id="startModal" class="modal">
+            <div class="modal-content">
+                <h2>Welcome to your 75 Days Challenge!</h2>
+                <p>When did you start or when do you plan to start your challenge?</p>
+                <input type="date" id="startDateInput">
+                <button id="setStartDate">Set Start Date</button>
+            </div>
+        </div>
+
+        <nav>
+            <button class="tab-button active" data-tab="rules">Rules</button>
+            <button class="tab-button" data-tab="tracker">Habit Tracker</button>
+            <button class="tab-button" data-tab="five-min-journal">5-Min Journal</button>
+            <button class="tab-button" data-tab="bible-study">Bible Study</button>
+            <button class="tab-button" data-tab="weekly-reflection">Weekly Reflection</button>
+            <button class="tab-button" data-tab="settings">Settings</button>
+        </nav>
+
+        <main>
+            <!-- Rules Tab -->
+            <section id="rules" class="tab-content active">
+                <h2>75 Days Challenge Rules</h2>
+                <div class="rules-container">
+                    <ol>
+                        <li>Complete your daily habit tracker (Bible study, journaling, hydration, workout, reading, studying)</li>
+                        <li>Make daily entries in your 5-minute journal</li>
+                        <li>Complete your Bible study with reflection</li>
+                        <li>Do a deep clean of your room at the end of every week</li>
+                        <li>Have a skincare day once every week</li>
+                        <li>No excuses, no missed days for 75 days straight!</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Tracker Tab -->
+            <section id="tracker" class="tab-content">
+                <h2>Habit Tracker</h2>
+                <div class="date-navigation">
+                    <button id="prevWeek"><i class="fas fa-chevron-left"></i></button>
+                    <h3 id="currentWeekDisplay">Week of April 19 - 25, 2025</h3>
+                    <button id="nextWeek"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="tracker-container" id="trackerContainer">
+                    <!-- Tracker will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- 5-Minute Journal Tab -->
+            <section id="five-min-journal" class="tab-content">
+                <h2>5-Minute Journal</h2>
+                <div class="journal-date-selector">
+                    <input type="date" id="journalDateSelector">
+                    <button id="goToJournalDate">Go</button>
+                </div>
+                <div class="journal-container">
+                    <h3 id="journalCurrentDate">Today, April 19, 2025</h3>
+                    <div class="journal-entry">
+                        <h4>I am grateful for...</h4>
+                        <textarea id="gratitude" rows="3" placeholder="List 3 things you're grateful for today..."></textarea>
+                    </div>
+                    <div class="journal-entry">
+                        <h4>What would make today great?</h4>
+                        <textarea id="greatDay" rows="3" placeholder="List 3 things that would make today wonderful..."></textarea>
+                    </div>
+                    <div class="journal-entry">
+                        <h4>Daily affirmations</h4>
+                        <textarea id="affirmations" rows="2" placeholder="I am..."></textarea>
+                    </div>
+                    <div class="journal-entry evening">
+                        <h4>3 Amazing things that happened today...</h4>
+                        <textarea id="amazingThings" rows="3" placeholder="List 3 amazing things from today..."></textarea>
+                    </div>
+                    <div class="journal-entry evening">
+                        <h4>How could I have made today better?</h4>
+                        <textarea id="betterDay" rows="3" placeholder="Reflect on how you could improve..."></textarea>
+                    </div>
+                    <button id="saveJournal" class="save-button">Save Journal Entry</button>
+                </div>
+            </section>
+
+            <!-- Bible Study Tab -->
+            <section id="bible-study" class="tab-content">
+                <h2>Bible Study Journal</h2>
+                <div class="journal-date-selector">
+                    <input type="date" id="bibleStudyDateSelector">
+                    <button id="goToBibleDate">Go</button>
+                </div>
+                <div class="bible-study-container">
+                    <h3 id="bibleStudyCurrentDate">Today, April 19, 2025</h3>
+                    <div class="bible-entry">
+                        <h4>Scripture Reading</h4>
+                        <div class="input-group">
+                            <label for="bibleBook">Book:</label>
+                            <input type="text" id="bibleBook" placeholder="e.g., John">
+                        </div>
+                        <div class="input-group">
+                            <label for="bibleChapter">Chapter:</label>
+                            <input type="text" id="bibleChapter" placeholder="e.g., 3">
+                        </div>
+                        <div class="input-group">
+                            <label for="bibleVerses">Verses:</label>
+                            <input type="text" id="bibleVerses" placeholder="e.g., 1-16">
+                        </div>
+                    </div>
+                    <div class="bible-entry">
+                        <h4>Key Verse</h4>
+                        <textarea id="keyVerse" rows="2" placeholder="Write the verse that stood out to you..."></textarea>
+                    </div>
+                    <div class="bible-entry">
+                        <h4>Observations</h4>
+                        <textarea id="observations" rows="3" placeholder="What does the passage say? What stands out?"></textarea>
+                    </div>
+                    <div class="bible-entry">
+                        <h4>Application</h4>
+                        <textarea id="application" rows="3" placeholder="How can I apply this to my life?"></textarea>
+                    </div>
+                    <div class="bible-entry">
+                        <h4>Prayer</h4>
+                        <textarea id="prayer" rows="3" placeholder="Write a prayer related to what you've learned..."></textarea>
+                    </div>
+                    <button id="saveBibleStudy" class="save-button">Save Bible Study</button>
+                </div>
+            </section>
+
+            <!-- Weekly Reflection Tab -->
+            <section id="weekly-reflection" class="tab-content">
+                <h2>Weekly Reflection</h2>
+                <div class="reflection-selector">
+                    <button id="prevWeekReflection"><i class="fas fa-chevron-left"></i></button>
+                    <h3 id="reflectionWeekDisplay">Week 1: April 19 - 25, 2025</h3>
+                    <button id="nextWeekReflection"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="weekly-tasks">
+                    <div class="task-item">
+                        <input type="checkbox" id="deepClean">
+                        <label for="deepClean">Deep Clean Room</label>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" id="skinCare">
+                        <label for="skinCare">Skincare Day</label>
+                    </div>
+                </div>
+                <div class="reflection-container">
+                    <h4>Weekly Reflection</h4>
+                    <textarea id="weeklyReflectionText" rows="6" placeholder="Reflect on your week. What went well? What challenges did you face? What did you learn? What will you improve next week?"></textarea>
+                    <button id="saveReflection" class="save-button">Save Reflection</button>
+                </div>
+            </section>
+
+            <!-- Settings Tab -->
+            <section id="settings" class="tab-content">
+                <h2>Settings</h2>
+                <div class="settings-container">
+                    <div class="setting-item">
+                        <label for="changeStartDate">Change Start Date:</label>
+                        <input type="date" id="changeStartDate">
+                        <button id="updateStartDate">Update</button>
+                    </div>
+                    <div class="setting-item">
+                        <label for="endDate">End Date (auto-calculated):</label>
+                        <input type="date" id="endDate" disabled>
+                    </div>
+                    <div class="setting-item">
+                        <label>Progress:</label>
+                        <div class="progress-bar">
+                            <div id="progressFill"></div>
+                            <span id="progressText">0%</span>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <button id="resetData" class="danger-button">Reset All Data</button>
+                        <p class="warning-text">Warning: This will delete all your entries and start fresh.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>75 Days Challenge Tracker &copy; 2025</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="tracker.js"></script>
+    <script src="journal.js"></script>
+    <script src="bibleStudy.js"></script>
+    <script src="weeklyReflection.js"></script>
+</body>
+</html>
